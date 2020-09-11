@@ -17,7 +17,9 @@ fn main() {
             mode: window::WindowMode::Windowed,
             ..Default::default()
         })
-        .add_startup_system(render_setup.system());
+        .add_resource(Msaa { samples: 4 })
+        .add_startup_system(render_setup.system())
+        .add_default_plugins();
 
     println!("Builder running");
     builder.run();
