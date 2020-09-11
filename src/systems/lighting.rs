@@ -5,12 +5,10 @@ use bevy::prelude::*;
 pub fn lighting_setup(
     mut commands: Commands,
 ) {
-    /*
     commands.spawn(LightComponents {
-        translation: Translation::new(0.0, 0.0, 50.0), 
+        translation: Translation::new(0.0, 0.0, 100.0), 
         ..Default::default()
     });
-    */
 
     println!("Lighting setup complete");
 }

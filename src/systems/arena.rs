@@ -6,10 +6,16 @@ pub fn arena_setup(
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
+    // Colors
+    let background_color = Color::rgb(0.0, 0.00, 0.0);
+    let wall_color = Color::rgb(0.35, 0.85, 1.0);
+
     // Background
     commands.spawn(PbrComponents {
-        mesh: meshes.add(Mesh::from(shape::Plane { size: 100.0 })),
-        material: materials.add(Color::rgb(0.1, 0.1, 0.1).into()),
+        mesh: meshes.add(Mesh::from(shape::Plane {
+            size: 100.0,
+        })),
+        material: materials.add(background_color.into()),
         translation: Translation::new(0.0, 0.0, 0.0),
         rotation: Rotation::from_rotation_x(1.57),
         ..Default::default()
@@ -19,11 +25,32 @@ pub fn arena_setup(
     commands.spawn(PbrComponents {
         mesh: meshes.add(Mesh::from(shape::Quad {
             flip: false,
-            size: Vec2::new(0.5, 6.0),
+            size: Vec2::new(0.5, 30.0),
         })),
-        material: materials.add(Color::rgb(0.5, 0.5, 0.5).into()),
-        translation: Translation::new(0.0, 0.0, 1.0),
-        //rotation: Rotation::from_rotation_x(1.8),
+        material: materials.add(wall_color.into()),
+        translation: Translation::new(-15.0, 0.0, 1.0),
+        ..Default::default()
+    });
+
+    // Right Wall
+    commands.spawn(PbrComponents {
+        mesh: meshes.add(Mesh::from(shape::Quad {
+            flip: false,
+            size: Vec2::new(0.5, 30.0),
+        })),
+        material: materials.add(wall_color.into()),
+        translation: Translation::new(15.0, 0.0, 1.0),
+        ..Default::default()
+    });
+
+    // Bottom Wall
+    commands.spawn(PbrComponents {
+        mesh: meshes.add(Mesh::from(shape::Quad {
+            flip: false,
+            size: Vec2::new(30.0, 0.5),
+        })),
+        material: materials.add(wall_color.into()),
+        translation: Translation::new(0.0, -14.75, 1.0),
         ..Default::default()
     });
 
