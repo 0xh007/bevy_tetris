@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 
-pub fn render_arena_setup(
+// Sets up the game board and walls for the arena
+pub fn arena_setup(
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,
