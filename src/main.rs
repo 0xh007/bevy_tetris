@@ -5,5 +5,4 @@ fn main() {
 }
 
 fn hello_world_system() {
-    println!("hello tetris");
 }
