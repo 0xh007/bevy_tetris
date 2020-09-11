@@ -5,9 +5,9 @@ pub fn render_setup(
 ) {
     commands.spawn(Camera3dComponents {
        transform: Transform::new_sync_disabled(Mat4::face_toward(
-           Vec3::new(0.0, 20.0, 0.0),
+           Vec3::new(0.0, 0.0, 50.0),
            Vec3::new(0.0, 0.0, 0.0),
-           Vec3::new(0.0, 0.0, 0.0),
+           Vec3::new(0.0, 1.0, 0.0),
        )),
        ..Default::default()
     });
