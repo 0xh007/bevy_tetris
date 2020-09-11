@@ -25,7 +25,7 @@ pub fn arena_setup(
     commands.spawn(PbrComponents {
         mesh: meshes.add(Mesh::from(shape::Quad {
             flip: false,
-            size: Vec2::new(0.5, 30.0),
+            size: Vec2::new(0.5, 40.0),
         })),
         material: materials.add(wall_color.into()),
         translation: Translation::new(-15.0, 0.0, 1.0),
@@ -36,7 +36,7 @@ pub fn arena_setup(
     commands.spawn(PbrComponents {
         mesh: meshes.add(Mesh::from(shape::Quad {
             flip: false,
-            size: Vec2::new(0.5, 30.0),
+            size: Vec2::new(0.5, 40.0),
         })),
         material: materials.add(wall_color.into()),
         translation: Translation::new(15.0, 0.0, 1.0),
@@ -50,7 +50,7 @@ pub fn arena_setup(
             size: Vec2::new(30.0, 0.5),
         })),
         material: materials.add(wall_color.into()),
-        translation: Translation::new(0.0, -14.75, 1.0),
+        translation: Translation::new(0.0, -19.75, 1.0),
         ..Default::default()
     });
 
