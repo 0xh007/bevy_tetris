@@ -1,8 +1,13 @@
+mod systems;
+
 use bevy::prelude::*;
+use systems::*;
 
 fn main() {
-    App::build().add_system(hello_world_system.system()).run();
-}
+    let mut builder = App::build();
 
-fn hello_world_system() {
+    builder
+        .add_startup_system(render_setup.system());
+
+    builder.run();
 }

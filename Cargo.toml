@@ -1,5 +1,5 @@
 [package]
-name = "breakout"
+name = "bevy_tetris_3d"
 version = "0.1.0"
 authors = ["Victor <victor.r.rogers@gmail.com>"]
 edition = "2018"
