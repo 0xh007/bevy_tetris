@@ -10,7 +10,7 @@ pub fn arena_setup(
     let background_color = Color::rgb(0.0, 0.00, 0.0);
     let wall_color = Color::rgb(0.0, 0.53, 0.8);
     let rotate_90_x = Rotation::from_rotation_x(1.5708);
-    let rotate_90_y_z = Rotation::from_rotation_xyz(0.0, 1.5708, 1.5708);
+    let rotate_90_z = Rotation::from_rotation_z(1.5708);
 
     // Background
     commands.spawn(
@@ -32,8 +32,8 @@ pub fn arena_setup(
                 .load("assets/wall/export/wall.gltf")
                 .unwrap(),
             material: materials.add(wall_color.into()),
-            rotation:  rotate_90_x,
-            translation: Translation::new(-25.0, 10.0, 3.0),
+            //rotation:  rotate_90_x,
+            translation: Translation::new(-5.0, 0.0, 3.0),
             ..Default::default()
         },
     );
@@ -45,8 +45,8 @@ pub fn arena_setup(
                 .load("assets/wall/export/wall.gltf")
                 .unwrap(),
             material: materials.add(wall_color.into()),
-            rotation: rotate_90_x,
-            translation: Translation::new(25.0, 10.0, 3.0),
+            //rotation: rotate_90_x,
+            translation: Translation::new(5.0, 0.0, 3.0),
             ..Default::default()
         },
     );
@@ -58,8 +58,8 @@ pub fn arena_setup(
                 .load("assets/bottom_wall/export/bottom_wall.gltf")
                 .unwrap(),
             material: materials.add(wall_color.into()),
-            rotation: rotate_90_y_z,
-            translation: Translation::new(0.0, -40.0, 3.0),
+            rotation: rotate_90_z,
+            translation: Translation::new(0.0, -10.0, 3.0),
             ..Default::default()
         },
     );

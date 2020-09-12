@@ -15,33 +15,12 @@
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "Cube"
-        }
-    ],
-    "materials" : [
-        {
-            "doubleSided" : true,
-            "emissiveFactor" : [
-                0,
-                0,
-                0
-            ],
-            "name" : "Material",
-            "pbrMetallicRoughness" : {
-                "baseColorFactor" : [
-                    0.800000011920929,
-                    0.800000011920929,
-                    0.800000011920929,
-                    1
-                ],
-                "metallicFactor" : 0,
-                "roughnessFactor" : 0.4000000059604645
-            }
+            "name" : "Wall"
         }
     ],
     "meshes" : [
         {
-            "name" : "Cube",
+            "name" : "Cube.008",
             "primitives" : [
                 {
                     "attributes" : {
@@ -49,8 +28,7 @@
                         "NORMAL" : 1,
                         "TEXCOORD_0" : 2
                     },
-                    "indices" : 3,
-                    "material" : 0
+                    "indices" : 3
                 }
             ]
         }
@@ -61,14 +39,14 @@
             "componentType" : 5126,
             "count" : 24,
             "max" : [
-                0.3009878695011139,
-                2.999985933303833,
-                49.99992370605469
+                0.19864192605018616,
+                9.99944019317627,
+                1
             ],
             "min" : [
-                -0.3000158369541168,
-                -3.000939130783081,
-                -49.99992370605469
+                -0.2004854679107666,
+                -9.99944019317627,
+                -1
             ],
             "type" : "VEC3"
         },
