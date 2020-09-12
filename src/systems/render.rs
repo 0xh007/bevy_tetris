@@ -2,7 +2,8 @@ use bevy::prelude::*;
 
 enum CameraType {
     GameCamera,
-    SideCamera,
+    LeftSideCamera,
+    RightSideCamera,
     TraditionalCamera,
 }
 
@@ -24,23 +25,34 @@ pub fn render_setup(
                ..Default::default()
             });
         },
-        CameraType::SideCamera => {
-            println!("Using SideCamera");
+        CameraType::LeftSideCamera => {
+            println!("Using LeftSideCamera");
             commands.spawn(Camera3dComponents {
                transform: Transform::new_sync_disabled(Mat4::face_toward(
-                   Vec3::new(-300.0, 0.0, 0.0),
-                   Vec3::new(0.0, 0.0, -10.0),
+                   Vec3::new(-50.0, 0.0, 10.0),
+                   Vec3::new(0.0, 0.0, 10.0),
+                   Vec3::new(0.0, 1.0, 0.0),
+               )),
+               ..Default::default()
+            });
+        },
+        CameraType::RightSideCamera => {
+            println!("Using LeftSideCamera");
+            commands.spawn(Camera3dComponents {
+               transform: Transform::new_sync_disabled(Mat4::face_toward(
+                   Vec3::new(50.0, 0.0, 10.0),
+                   Vec3::new(0.0, 0.0, 10.0),
                    Vec3::new(0.0, 1.0, 0.0),
                )),
                ..Default::default()
             });
         },
         CameraType::TraditionalCamera => {
-            println!("Using SideCamera");
+            println!("Using TraditionalCamera");
             commands.spawn(Camera3dComponents {
                transform: Transform::new_sync_disabled(Mat4::face_toward(
-                   Vec3::new(0.0, 5.0, 35.0),
-                   Vec3::new(0.0, 2.0, 0.0),
+                   Vec3::new(0.0, -5.0, 35.0),
+                   Vec3::new(0.0, 1.0, 0.0),
                    Vec3::new(0.0, 1.0, 0.0),
                )),
                ..Default::default()
