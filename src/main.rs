@@ -18,6 +18,8 @@ fn main() {
             ..Default::default()
         })
         .add_resource(Msaa { samples: 4 })
+        .add_startup_system(arena_setup.system())
+        .add_startup_system(lighting_setup.system())
         .add_startup_system(render_setup.system())
         .add_default_plugins();
 
