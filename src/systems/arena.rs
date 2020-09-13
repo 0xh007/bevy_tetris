@@ -65,39 +65,71 @@ pub fn arena_setup(
     println!("Arena setup complete");
 }
 
+enum TetronimoTest{
+    Fill,
+    Single,
+}
+
+pub struct Tetronimo {
+    velocity: Vec3,
+}
+
 // Test system to setup some tetronimos for debug purposes
 pub fn tetronimo_test_setup(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
-    let tetronimo_debug_on = true;
+    let tetronimo_test_type = TetronimoTest::Fill;
+
     let tetronimo_color = Color::rgb(0.47, 0.16, 0.06);
-    let x_min = -4;
-    let x_max = 6;
-    let y_min = -9;
-    let y_max = 11;
 
-    if tetronimo_debug_on {
-        for x in x_min..x_max {
-            for y in y_min..y_max {
-                let offset = 0.5;
-                let x_pos = x as f32 - offset;
-                let y_pos = y as f32 - offset;
+    match tetronimo_test_type {
+        TetronimoTest::Fill => {
+            let x_min = -4;
+            let x_max = 6;
+            let y_min = -9;
+            let y_max = 11;
 
-                commands.spawn(
-                    PbrComponents {
-                        mesh: asset_server
-                            .load("assets/tetronimo/export/tetronimo.gltf")
-                            .unwrap(),
-                        material: materials.add(tetronimo_color.into()),
-                        translation: Translation::new(x_pos as f32, y_pos as f32, 3.5),
-                        ..Default::default()
-                    },
-                );
+            for x in x_min..x_max {
+                for y in y_min..y_max {
+                    let offset = 0.5;
+                    let x_pos = x as f32 - offset;
+                    let y_pos = y as f32 - offset;
+
+                    commands.spawn(
+                        PbrComponents {
+                            mesh: asset_server
+                                .load("assets/tetronimo/export/tetronimo.gltf")
+                                .unwrap(),
+                            material: materials.add(tetronimo_color.into()),
+                            translation: Translation::new(x_pos as f32, y_pos as f32, 3.5),
+                            ..Default::default()
+                        },
+                    );
+                }
             }
-        }
 
-        println!("Tetronimo test setup complete");
-    }
+            println!("Tetronimo Fill test setup complete");
+        },
+
+        TetronimoTest::Single => {
+            commands.spawn(
+                PbrComponents {
+                    mesh: asset_server
+                        .load("assets/tetronimo/export/tetronimo.gltf")
+                        .unwrap(),
+                    material: materials.add(tetronimo_color.into()),
+                    translation: Translation::new(0.0, 9.5, 3.5),
+                    ..Default::default()
+                },
+            )
+            .with(Tetronimo {
+                velocity: 10.0 * Vec3::new(0.0, -0.5, 0.0).normalize(),
+            });
+
+            println!("Tetronimo Single test setup complete");
+        },
+    };
+
 }
