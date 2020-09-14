@@ -13,6 +13,7 @@ pub fn arena_setup(
     let rotate_90_z = Rotation::from_rotation_z(1.5708);
 
     // Background
+    /*
     commands.spawn(
         PbrComponents {
             mesh: asset_server
@@ -24,6 +25,7 @@ pub fn arena_setup(
             ..Default::default()
         },
     );
+    */
 
     // Left Wall
     commands.spawn(
@@ -68,10 +70,6 @@ pub fn arena_setup(
 enum TetronimoTest{
     Fill,
     Single,
-}
-
-pub struct Tetronimo {
-    velocity: Vec3,
 }
 
 // Test system to setup some tetronimos for debug purposes
@@ -123,10 +121,7 @@ pub fn tetronimo_test_setup(
                     translation: Translation::new(0.0, 9.5, 3.5),
                     ..Default::default()
                 },
-            )
-            .with(Tetronimo {
-                velocity: 10.0 * Vec3::new(0.0, -0.5, 0.0).normalize(),
-            });
+            );
 
             println!("Tetronimo Single test setup complete");
         },

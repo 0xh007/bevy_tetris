@@ -6,7 +6,7 @@ pub fn lighting_setup(
     mut commands: Commands,
 ) {
     commands.spawn(LightComponents {
-        translation: Translation::new(0.0, 100.0, 100.0), 
+        translation: Translation::new(0.0, 10.0, 10.0), 
         ..Default::default()
     });
 

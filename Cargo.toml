@@ -8,7 +8,6 @@ edition = "2018"
 
 [dependencies]
 bevy = { git = "https://github.com/bevyengine/bevy" }
-bevy_rapier3d = { git = "https://github.com/dimforge/bevy_rapier"}
 
 [patch.crates-io]
 bevy = { git = "https://github.com/bevyengine/bevy" }

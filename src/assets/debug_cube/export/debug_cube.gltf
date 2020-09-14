@@ -15,21 +15,42 @@
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "Tetronimo"
+            "name" : "Cube"
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "emissiveFactor" : [
+                0,
+                0,
+                0
+            ],
+            "name" : "Material",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.800000011920929,
+                    0.800000011920929,
+                    0.800000011920929,
+                    1
+                ],
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.4000000059604645
+            }
         }
     ],
     "meshes" : [
         {
-            "name" : "Cube.003",
+            "name" : "Cube",
             "primitives" : [
                 {
                     "attributes" : {
                         "POSITION" : 0,
                         "NORMAL" : 1,
-                        "TANGENT" : 2,
-                        "TEXCOORD_0" : 3
+                        "TEXCOORD_0" : 2
                     },
-                    "indices" : 4
+                    "indices" : 3,
+                    "material" : 0
                 }
             ]
         }
@@ -38,75 +59,64 @@
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 114,
+            "count" : 24,
             "max" : [
-                0.4937164783477783,
-                0.49906125664711,
-                0.49843668937683105
+                1,
+                1,
+                1
             ],
             "min" : [
-                -0.5031567811965942,
-                -0.49781206250190735,
-                -0.4984366297721863
+                -1,
+                -1,
+                -1
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 114,
+            "count" : 24,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 114,
-            "type" : "VEC4"
-        },
-        {
-            "bufferView" : 3,
-            "componentType" : 5126,
-            "count" : 114,
+            "count" : 24,
             "type" : "VEC2"
         },
         {
-            "bufferView" : 4,
+            "bufferView" : 3,
             "componentType" : 5123,
-            "count" : 132,
+            "count" : 36,
             "type" : "SCALAR"
         }
     ],
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 1368,
+            "byteLength" : 288,
             "byteOffset" : 0
         },
         {
             "buffer" : 0,
-            "byteLength" : 1368,
-            "byteOffset" : 1368
+            "byteLength" : 288,
+            "byteOffset" : 288
         },
         {
             "buffer" : 0,
-            "byteLength" : 1824,
-            "byteOffset" : 2736
+            "byteLength" : 192,
+            "byteOffset" : 576
         },
         {
             "buffer" : 0,
-            "byteLength" : 912,
-            "byteOffset" : 4560
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 264,
-            "byteOffset" : 5472
+            "byteLength" : 72,
+            "byteOffset" : 768
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 5736,
-            "uri" : "tetronimo.bin"
+            "byteLength" : 840,
+            "uri" : "debug_cube.bin"
         }
     ]
 }

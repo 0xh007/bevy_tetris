@@ -26,9 +26,10 @@
                     "attributes" : {
                         "POSITION" : 0,
                         "NORMAL" : 1,
-                        "TEXCOORD_0" : 2
+                        "TANGENT" : 2,
+                        "TEXCOORD_0" : 3
                     },
-                    "indices" : 3
+                    "indices" : 4
                 }
             ]
         }
@@ -60,10 +61,16 @@
             "bufferView" : 2,
             "componentType" : 5126,
             "count" : 24,
-            "type" : "VEC2"
+            "type" : "VEC4"
         },
         {
             "bufferView" : 3,
+            "componentType" : 5126,
+            "count" : 24,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 4,
             "componentType" : 5123,
             "count" : 36,
             "type" : "SCALAR"
@@ -82,18 +89,23 @@
         },
         {
             "buffer" : 0,
-            "byteLength" : 192,
+            "byteLength" : 384,
             "byteOffset" : 576
         },
         {
             "buffer" : 0,
+            "byteLength" : 192,
+            "byteOffset" : 960
+        },
+        {
+            "buffer" : 0,
             "byteLength" : 72,
-            "byteOffset" : 768
+            "byteOffset" : 1152
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 840,
+            "byteLength" : 1224,
             "uri" : "wall.bin"
         }
     ]

@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 
 enum CameraType {
+    DebugCamera,
     GameCamera,
     LeftSideCamera,
     RightSideCamera,
@@ -11,9 +12,20 @@ enum CameraType {
 pub fn render_setup(
     mut commands: Commands,
 ) {
-    let camera_type = CameraType::GameCamera;
+    let camera_type = CameraType::TraditionalCamera;
 
     match camera_type { 
+        CameraType::DebugCamera => {
+            println!("Using DebugCamera");
+            commands.spawn(Camera3dComponents {
+               transform: Transform::new_sync_disabled(Mat4::face_toward(
+                   Vec3::new(0.0, 0.0, 20.0),
+                   Vec3::new(0.0, 0.0, 0.0),
+                   Vec3::new(0.0, 1.0, 0.0),
+               )),
+               ..Default::default()
+            });
+        },
         CameraType::GameCamera => {
             println!("Using GameCamera");
             commands.spawn(Camera3dComponents {
