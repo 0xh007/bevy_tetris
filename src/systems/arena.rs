@@ -71,7 +71,7 @@ enum TetronimoTest{
 }
 
 pub struct Tetronimo {
-    velocity: Vec3,
+    pub speed: f32,
 }
 
 // Test system to setup some tetronimos for debug purposes
@@ -80,7 +80,7 @@ pub fn tetronimo_test_setup(
     asset_server: Res<AssetServer>,
     mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
-    let tetronimo_test_type = TetronimoTest::Fill;
+    let tetronimo_test_type = TetronimoTest::Single;
 
     let tetronimo_color = Color::rgb(0.47, 0.16, 0.06);
 
@@ -123,7 +123,10 @@ pub fn tetronimo_test_setup(
                     transform: Transform::from_translation(Vec3::new(0.0, 9.5, 3.5)),
                     ..Default::default()
                 },
-            );
+            )
+            .with(Tetronimo {
+                speed: 1.0,
+            });
 
             println!("Tetronimo Single test setup complete");
         },

@@ -22,6 +22,7 @@ fn main() {
         .add_startup_system(lighting_setup.system())
         .add_startup_system(arena_setup.system())
         .add_startup_system(tetronimo_test_setup.system())
+        .add_system(fall_system.system())
         .add_default_plugins();
 
     println!("Builder running");
