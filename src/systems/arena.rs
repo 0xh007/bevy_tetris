@@ -9,23 +9,21 @@ pub fn arena_setup(
     // Colors
     let background_color = Color::rgb(0.0, 0.001, 0.002);
     let wall_color = Color::rgb(0.08, 0.38, 0.43);
-    let rotate_90_x = Rotation::from_rotation_x(1.5708);
-    let rotate_90_z = Rotation::from_rotation_z(1.5708);
+    let rotate_90_x = Quat::from_rotation_x(1.5708);
+    let rotate_90_z = Quat::from_rotation_z(1.5708);
 
     // Background
-    /*
     commands.spawn(
         PbrComponents {
             mesh: asset_server
                 .load("assets/background/export/background.gltf")
                 .unwrap(),
             material: materials.add(background_color.into()),
-            rotation:  rotate_90_x,
-            translation: Translation::new(0.0, 0.0, 0.0),
+            transform: Transform::from_translation(Vec3::new(0.0, 0.0, 0.0))
+                .with_rotation(rotate_90_x),
             ..Default::default()
         },
     );
-    */
 
     // Left Wall
     commands.spawn(
@@ -34,7 +32,7 @@ pub fn arena_setup(
                 .load("assets/wall/export/wall.gltf")
                 .unwrap(),
             material: materials.add(wall_color.into()),
-            translation: Translation::new(-5.20, 0.0, 3.0),
+            transform: Transform::from_translation(Vec3::new(-5.2, 0.0, 3.0)),
             ..Default::default()
         },
     );
@@ -46,7 +44,7 @@ pub fn arena_setup(
                 .load("assets/wall/export/wall.gltf")
                 .unwrap(),
             material: materials.add(wall_color.into()),
-            translation: Translation::new(5.20, 0.0, 3.0),
+            transform: Transform::from_translation(Vec3::new(5.2, 0.0, 3.0)),
             ..Default::default()
         },
     );
@@ -58,8 +56,8 @@ pub fn arena_setup(
                 .load("assets/bottom_wall/export/bottom_wall.gltf")
                 .unwrap(),
             material: materials.add(wall_color.into()),
-            rotation: rotate_90_z,
-            translation: Translation::new(0.22, -10.15, 3.0),
+            transform: Transform::from_translation(Vec3::new(-10.15, -0.22, 3.0))
+                .with_rotation(rotate_90_z),
             ..Default::default()
         },
     );
@@ -70,6 +68,10 @@ pub fn arena_setup(
 enum TetronimoTest{
     Fill,
     Single,
+}
+
+pub struct Tetronimo {
+    velocity: Vec3,
 }
 
 // Test system to setup some tetronimos for debug purposes
@@ -101,7 +103,7 @@ pub fn tetronimo_test_setup(
                                 .load("assets/tetronimo/export/tetronimo.gltf")
                                 .unwrap(),
                             material: materials.add(tetronimo_color.into()),
-                            translation: Translation::new(x_pos as f32, y_pos as f32, 3.5),
+                            transform: Transform::from_translation(Vec3::new(x_pos as f32, y_pos as f32, 3.5)),
                             ..Default::default()
                         },
                     );
@@ -118,7 +120,7 @@ pub fn tetronimo_test_setup(
                         .load("assets/tetronimo/export/tetronimo.gltf")
                         .unwrap(),
                     material: materials.add(tetronimo_color.into()),
-                    translation: Translation::new(0.0, 9.5, 3.5),
+                    transform: Transform::from_translation(Vec3::new(0.0, 9.5, 3.5)),
                     ..Default::default()
                 },
             );

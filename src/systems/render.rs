@@ -12,13 +12,13 @@ enum CameraType {
 pub fn render_setup(
     mut commands: Commands,
 ) {
-    let camera_type = CameraType::TraditionalCamera;
+    let camera_type = CameraType::GameCamera;
 
     match camera_type { 
         CameraType::DebugCamera => {
             println!("Using DebugCamera");
             commands.spawn(Camera3dComponents {
-               transform: Transform::new_sync_disabled(Mat4::face_toward(
+               transform: Transform::new(Mat4::face_toward(
                    Vec3::new(0.0, 0.0, 20.0),
                    Vec3::new(0.0, 0.0, 0.0),
                    Vec3::new(0.0, 1.0, 0.0),
@@ -29,7 +29,7 @@ pub fn render_setup(
         CameraType::GameCamera => {
             println!("Using GameCamera");
             commands.spawn(Camera3dComponents {
-               transform: Transform::new_sync_disabled(Mat4::face_toward(
+               transform: Transform::new(Mat4::face_toward(
                    Vec3::new(0.0, -18.0, 16.0),
                    Vec3::new(0.0, 2.0, 0.0),
                    Vec3::new(0.0, 1.0, 0.0),
@@ -40,7 +40,7 @@ pub fn render_setup(
         CameraType::LeftSideCamera => {
             println!("Using LeftSideCamera");
             commands.spawn(Camera3dComponents {
-               transform: Transform::new_sync_disabled(Mat4::face_toward(
+               transform: Transform::new(Mat4::face_toward(
                    Vec3::new(-50.0, 0.0, 10.0),
                    Vec3::new(0.0, 0.0, 10.0),
                    Vec3::new(0.0, 1.0, 0.0),
@@ -51,7 +51,7 @@ pub fn render_setup(
         CameraType::RightSideCamera => {
             println!("Using LeftSideCamera");
             commands.spawn(Camera3dComponents {
-               transform: Transform::new_sync_disabled(Mat4::face_toward(
+               transform: Transform::new(Mat4::face_toward(
                    Vec3::new(50.0, 0.0, 10.0),
                    Vec3::new(0.0, 0.0, 10.0),
                    Vec3::new(0.0, 1.0, 0.0),
@@ -62,7 +62,7 @@ pub fn render_setup(
         CameraType::TraditionalCamera => {
             println!("Using TraditionalCamera");
             commands.spawn(Camera3dComponents {
-               transform: Transform::new_sync_disabled(Mat4::face_toward(
+               transform: Transform::new(Mat4::face_toward(
                    Vec3::new(0.0, -5.0, 35.0),
                    Vec3::new(0.0, 1.0, 0.0),
                    Vec3::new(0.0, 1.0, 0.0),

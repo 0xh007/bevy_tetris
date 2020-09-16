@@ -6,7 +6,7 @@ pub fn lighting_setup(
     mut commands: Commands,
 ) {
     commands.spawn(LightComponents {
-        translation: Translation::new(0.0, 10.0, 10.0), 
+        transform: Transform::from_translation(Vec3::new(0.0, 10.0, 10.0)),
         ..Default::default()
     });
 
