@@ -20,7 +20,7 @@ fn main() {
             mode: window::WindowMode::Windowed,
             ..Default::default()
         })
-        .add_resource(TetrisGrid { grid: [[false; 10] ; 20] })
+        .add_resource(TetrisGrid::construct())
         .add_startup_system(render_setup.system())
         .add_startup_system(lighting_setup.system())
         .add_startup_system(arena_setup.system())
