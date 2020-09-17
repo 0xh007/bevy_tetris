@@ -120,7 +120,7 @@ pub fn tetronimo_test_setup(
                         .load("assets/tetronimo/export/tetronimo.gltf")
                         .unwrap(),
                     material: materials.add(tetronimo_color.into()),
-                    transform: Transform::from_translation(Vec3::new(0.0, 9.5, 3.5)),
+                    transform: Transform::from_translation(Vec3::new(-2.5, -6.5, 3.5)),
                     ..Default::default()
                 },
             )
