@@ -125,7 +125,7 @@ pub fn tetronimo_test_setup(
                 },
             )
             .with(Tetronimo {
-                speed: 1.0,
+                speed: 2.0,
             });
 
             println!("Tetronimo Single test setup complete");
