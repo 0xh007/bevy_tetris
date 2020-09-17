@@ -55,6 +55,7 @@ impl TetrisGrid {
 
                 if pos_x_round == grid_x_round {
                     if pos_y_round == grid_y_round {
+                        println!("Occupied [{}][{}]", x, y);
                         self.grid[x][y].occupied = true;
                         found_cell.0 = x as i32;
                         found_cell.1 = y as i32;

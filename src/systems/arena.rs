@@ -128,6 +128,20 @@ pub fn tetronimo_test_setup(
                 speed: 2.0,
             });
 
+            commands.spawn(
+                PbrComponents {
+                    mesh: asset_server
+                        .load("assets/tetronimo/export/tetronimo.gltf")
+                        .unwrap(),
+                    material: materials.add(tetronimo_color.into()),
+                    transform: Transform::from_translation(Vec3::new(-2.5, -9.5, 3.5)),
+                    ..Default::default()
+                },
+            )
+            .with(Tetronimo {
+                speed: 2.0,
+            });
+
             println!("Tetronimo Single test setup complete");
         },
     };
