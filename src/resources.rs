@@ -70,7 +70,17 @@ impl TetrisGrid {
     }
 
     pub fn is_cell_below_occupied(&self, cur_x: i32, cur_y: i32) -> bool {
-        self.grid[cur_x as usize][(cur_y -1) as usize].occupied
+        let x = cur_x;
+        let y = cur_y - 1;
+
+        // The cell is occupied if we're at the bottom of the grid
+        if y < 0 {
+            true
+        } else {
+            // Check the cell below if we're not at the bottom
+            self.grid[x as usize][y as usize].occupied
+        }
+
     }
 }
 
