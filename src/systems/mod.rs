@@ -9,5 +9,6 @@ pub use arena::{
     Tetronimo,
 };
 pub use fall::fall_system;
+pub use fall::grid_debug_system;
 pub use lighting::lighting_setup;
 pub use render::render_setup;

@@ -31,7 +31,6 @@ impl TetrisGrid {
                 new_grid[x][y].location = Vec3::new(current_x, current_y, static_z);
                 new_grid[x][y].x = x as i32;
                 new_grid[x][y].y = y as i32;
-                println!("Cell Created: X {}, Y {}", current_x, current_y); 
                 current_y += 1.0;
             }
             current_x += 1.0;
@@ -55,7 +54,6 @@ impl TetrisGrid {
 
                 if pos_x_round == grid_x_round {
                     if pos_y_round == grid_y_round {
-                        println!("Occupied [{}][{}]", x, y);
                         self.grid[x][y].occupied = true;
                         found_cell.0 = x as i32;
                         found_cell.1 = y as i32;
@@ -81,8 +79,28 @@ impl TetrisGrid {
             // Check the cell below if we're not at the bottom
             self.grid[x as usize][y as usize].occupied
         }
-
     }
+
+    pub fn print_grid(&self) {
+        let grid_rows = 20 - 1;
+        println!("-----GRID-----");
+        for row in (0..grid_rows).rev() {
+            println!("[{}][{}][{}][{}][{}][{}][{}][{}][{}][{}]",
+                self.grid[0][row].occupied,
+                self.grid[1][row].occupied,
+                self.grid[2][row].occupied,
+                self.grid[3][row].occupied,
+                self.grid[4][row].occupied,
+                self.grid[5][row].occupied,
+                self.grid[6][row].occupied,
+                self.grid[7][row].occupied,
+                self.grid[8][row].occupied,
+                self.grid[9][row].occupied,
+            );
+        }
+        println!("----END GRID-----");
+    }
+
 }
 
 #[derive(Copy, Clone)]

@@ -125,7 +125,7 @@ pub fn tetronimo_test_setup(
                 },
             )
             .with(Tetronimo {
-                speed: 2.0,
+                speed: 1.0,
             });
 
             commands.spawn(
@@ -134,12 +134,12 @@ pub fn tetronimo_test_setup(
                         .load("assets/tetronimo/export/tetronimo.gltf")
                         .unwrap(),
                     material: materials.add(tetronimo_color.into()),
-                    transform: Transform::from_translation(Vec3::new(-2.5, -9.5, 3.5)),
+                    transform: Transform::from_translation(Vec3::new(-2.5, -4.5, 3.5)),
                     ..Default::default()
                 },
             )
             .with(Tetronimo {
-                speed: 2.0,
+                speed: 1.0,
             });
 
             println!("Tetronimo Single test setup complete");

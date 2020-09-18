@@ -19,3 +19,9 @@ pub fn fall_system(
         }
     }
 }
+
+pub fn grid_debug_system(
+    mut testris_grid: ResMut<TetrisGrid>,
+) {
+    TetrisGrid::print_grid(&testris_grid);
+}
