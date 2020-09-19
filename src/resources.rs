@@ -41,24 +41,34 @@ impl TetrisGrid {
 
     // Maps the current position of the block to the nearest grid cell
     pub fn update_position(&mut self, position: Vec3) -> (i32, i32) {
-        let grid_rows = 10 - 1;
-        let grid_columns = 20 - 1;
+        let grid_columns = 10 - 1;
+        let grid_rows = 20 - 1;
         let pos_x_round = position.x().round();
         let pos_y_round = position.y().round();
         let mut found_cell = (-1, -1);
 
-        for x in 0..grid_rows {
-            for y in 0..grid_columns {
+        for x in 0..grid_columns {
+            for y in 0..grid_rows {
                 let grid_x_round = self.grid[x][y].location.x().round();
                 let grid_y_round = self.grid[x][y].location.y().round();
 
                 if pos_x_round == grid_x_round {
                     if pos_y_round == grid_y_round {
-                        self.grid[x][y].occupied = true;
-                        found_cell.0 = x as i32;
-                        found_cell.1 = y as i32;
+                        if !self.grid[x][y].occupied  { 
+                            self.grid[x][y].occupied = true;
+                        }
+                            found_cell.0 = x as i32;
+                            found_cell.1 = y as i32;
+
                     }
                     else {
+                        if self.grid[x][y].occupied  { 
+                            self.grid[x][y].occupied = false;
+                        }
+                    }
+                }
+                else {
+                    if self.grid[x][y].occupied  { 
                         self.grid[x][y].occupied = false;
                     }
                 }
@@ -74,11 +84,17 @@ impl TetrisGrid {
 
         // The cell is occupied if we're at the bottom of the grid
         if y < 0 {
-            true
+            return true;
         } else {
             // Check the cell below if we're not at the bottom
-            self.grid[x as usize][y as usize].occupied
+            if cur_y == 1 {
+                return true;
+            }
+
+            //TODO: Block is stating that it's spot is unoccupied when it's on the floor
+            return self.grid[x as usize][y as usize].occupied;
         }
+
     }
 
     pub fn print_grid(&self) {

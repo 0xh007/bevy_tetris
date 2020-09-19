@@ -12,7 +12,7 @@ enum CameraType {
 pub fn render_setup(
     mut commands: Commands,
 ) {
-    let camera_type = CameraType::TraditionalCamera;
+    let camera_type = CameraType::GameCamera;
 
     match camera_type { 
         CameraType::DebugCamera => {

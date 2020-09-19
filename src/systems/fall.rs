@@ -13,7 +13,7 @@ pub fn fall_system(
 
         let position = Vec3::new(translation.x(), translation.y(), translation.z());
         let cell = testris_grid.update_position(position);
-
+        
         if !TetrisGrid::is_cell_below_occupied(&testris_grid, cell.0, cell.1) {
             *translation.y_mut() += time.delta_seconds * direction * tetronimo.speed;
         }
