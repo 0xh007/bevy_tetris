@@ -56,7 +56,7 @@ pub fn arena_setup(
                 .load("assets/bottom_wall/export/bottom_wall.gltf")
                 .unwrap(),
             material: materials.add(wall_color.into()),
-            transform: Transform::from_translation(Vec3::new(-10.15, -0.22, 3.0))
+            transform: Transform::from_translation(Vec3::new(0.215, -10.0, 3.0))
                 .with_rotation(rotate_90_z),
             ..Default::default()
         },
