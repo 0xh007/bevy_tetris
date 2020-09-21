@@ -72,6 +72,7 @@ enum TetronimoTest{
 
 pub struct Tetronimo {
     pub speed: f32,
+    pub name: String,
     pub last_grid_pos: (i32, i32),
     pub current_grid_pos: (i32, i32),
 }
@@ -130,6 +131,7 @@ pub fn tetronimo_test_setup(
                 speed: 0.5,
                 last_grid_pos: (-1, -1),
                 current_grid_pos: (-1, -1),
+                name: String::from("A"),
             });
 
             commands.spawn(
@@ -138,7 +140,7 @@ pub fn tetronimo_test_setup(
                         .load("assets/tetronimo/export/tetronimo.gltf")
                         .unwrap(),
                     material: materials.add(tetronimo_color.into()),
-                    transform: Transform::from_translation(Vec3::new(-2.5, -3.5, 3.5)),
+                    transform: Transform::from_translation(Vec3::new(-2.5, -2.5, 3.5)),
                     ..Default::default()
                 },
             )
@@ -146,6 +148,7 @@ pub fn tetronimo_test_setup(
                 speed: 0.5,
                 last_grid_pos: (-1, -1),
                 current_grid_pos: (-1, -1),
+                name: String::from("B"),
             });
 
             commands.spawn(
@@ -154,7 +157,7 @@ pub fn tetronimo_test_setup(
                         .load("assets/tetronimo/export/tetronimo.gltf")
                         .unwrap(),
                     material: materials.add(tetronimo_color.into()),
-                    transform: Transform::from_translation(Vec3::new(-2.5, -9.5, 3.5)),
+                    transform: Transform::from_translation(Vec3::new(-2.5, -4.5, 3.5)),
                     ..Default::default()
                 },
             )
@@ -162,6 +165,7 @@ pub fn tetronimo_test_setup(
                 speed: 0.5,
                 last_grid_pos: (-1, -1),
                 current_grid_pos: (-1, -1),
+                name: String::from("C"),
             });
 
             println!("Tetronimo Single test setup complete");

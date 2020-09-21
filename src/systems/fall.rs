@@ -20,6 +20,7 @@ pub fn fall_system(
         }
 
         println!("-----");
+        println!("{}", tetronimo.name);
         println!("Last Pos [{}][{}]", tetronimo.last_grid_pos.0, tetronimo.last_grid_pos.1);
         println!("Current Grid Pos [{}][{}]", tetronimo.current_grid_pos.0, tetronimo.current_grid_pos.1);
         println!("-----");
