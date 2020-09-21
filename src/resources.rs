@@ -40,7 +40,7 @@ impl TetrisGrid {
     }
 
     // Maps the current position of the block to the nearest grid cell
-    pub fn update_position(&mut self, position: Vec3) -> (i32, i32) {
+    pub fn update_position(&mut self, position: Vec3, last_grid_pos: (i32, i32)) -> (i32, i32) {
         let grid_columns = 10 - 1;
         let grid_rows = 20 - 1;
         let pos_x_round = position.x().round();
@@ -60,19 +60,19 @@ impl TetrisGrid {
                             found_cell.0 = x as i32;
                             found_cell.1 = y as i32;
 
-                    }
-                    else {
-                        if self.grid[x][y].occupied  { 
-                            self.grid[x][y].occupied = false;
+                        if last_grid_pos.0 != -1 && last_grid_pos.1 != -1 {
+                            let unoccupied_x = last_grid_pos.0 as usize;
+                            let unoccupied_y = last_grid_pos.1 as usize;
+
+                            self.grid[unoccupied_x][unoccupied_y].occupied = false;
                         }
                     }
                 }
-                else {
-                    if self.grid[x][y].occupied  { 
-                        self.grid[x][y].occupied = false;
-                    }
-                }
             }
+        }
+
+        if found_cell.0 == -1 && found_cell.1 == -1 {
+            println!("invalid cell");
         }
 
         found_cell
@@ -87,11 +87,6 @@ impl TetrisGrid {
             return true;
         } else {
             // Check the cell below if we're not at the bottom
-            if cur_y == 1 {
-                return true;
-            }
-
-            //TODO: Block is stating that it's spot is unoccupied when it's on the floor
             return self.grid[x as usize][y as usize].occupied;
         }
 

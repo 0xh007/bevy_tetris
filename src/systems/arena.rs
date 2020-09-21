@@ -72,6 +72,8 @@ enum TetronimoTest{
 
 pub struct Tetronimo {
     pub speed: f32,
+    pub last_grid_pos: (i32, i32),
+    pub current_grid_pos: (i32, i32),
 }
 
 // Test system to setup some tetronimos for debug purposes
@@ -126,6 +128,8 @@ pub fn tetronimo_test_setup(
             )
             .with(Tetronimo {
                 speed: 0.5,
+                last_grid_pos: (-1, -1),
+                current_grid_pos: (-1, -1),
             });
 
             commands.spawn(
@@ -140,6 +144,8 @@ pub fn tetronimo_test_setup(
             )
             .with(Tetronimo {
                 speed: 0.5,
+                last_grid_pos: (-1, -1),
+                current_grid_pos: (-1, -1),
             });
 
             commands.spawn(
@@ -154,6 +160,8 @@ pub fn tetronimo_test_setup(
             )
             .with(Tetronimo {
                 speed: 0.5,
+                last_grid_pos: (-1, -1),
+                current_grid_pos: (-1, -1),
             });
 
             println!("Tetronimo Single test setup complete");
