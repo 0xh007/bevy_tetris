@@ -6,7 +6,7 @@ mod render;
 pub use arena::{
     arena_setup,
     tetronimo_test_setup,
-    Tetronimo,
+    TetronimoBlock,
     TetronimoState,
 };
 pub use fall::fall_system;

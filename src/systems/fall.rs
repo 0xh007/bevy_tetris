@@ -1,12 +1,12 @@
 use bevy::prelude::*;
 use crate::TetrisGrid;
-use crate::Tetronimo;
+use crate::TetronimoBlock;
 use crate::TetronimoState;
 
 pub fn fall_system(
     time: Res<Time>,
     mut testris_grid: ResMut<TetrisGrid>,
-    mut tetronimo_query: Query<(&mut Tetronimo, &mut Transform)>,
+    mut tetronimo_query: Query<(&mut TetronimoBlock, &mut Transform)>,
 ) {
     for (mut tetronimo, mut transform) in &mut tetronimo_query.iter() {
         let direction = -1.0;

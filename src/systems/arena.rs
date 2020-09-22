@@ -86,11 +86,17 @@ impl fmt::Display for TetronimoState {
     }
 }
 
-pub struct Tetronimo {
+pub struct TetronimoBlock {
     pub speed: f32,
     pub name: String,
     pub last_grid_pos: (i32, i32),
     pub current_grid_pos: (i32, i32),
+    pub state: TetronimoState,
+}
+
+pub struct Tetronimo {
+    pub speed: f32,
+    pub name: String,
     pub state: TetronimoState,
 }
 
@@ -134,6 +140,15 @@ pub fn tetronimo_test_setup(
         },
 
         TetronimoTest::Single => {
+            // T-tetronimo
+            commands.spawn((
+                    Tetronimo {
+                        speed: 0.5,
+                        name: String::from("T-Tetronimo"),
+                        state: TetronimoState::Moving,
+                    },
+            ));
+
             // A
             commands.spawn(
                 PbrComponents {
@@ -145,7 +160,7 @@ pub fn tetronimo_test_setup(
                     ..Default::default()
                 },
             )
-            .with(Tetronimo {
+            .with(TetronimoBlock {
                 speed: 0.5,
                 last_grid_pos: (-1, -1),
                 current_grid_pos: (-1, -1),
@@ -164,7 +179,7 @@ pub fn tetronimo_test_setup(
                     ..Default::default()
                 },
             )
-            .with(Tetronimo {
+            .with(TetronimoBlock {
                 speed: 0.5,
                 last_grid_pos: (-1, -1),
                 current_grid_pos: (-1, -1),
@@ -183,7 +198,7 @@ pub fn tetronimo_test_setup(
                     ..Default::default()
                 },
             )
-            .with(Tetronimo {
+            .with(TetronimoBlock {
                 speed: 0.5,
                 last_grid_pos: (-1, -1),
                 current_grid_pos: (-1, -1),
@@ -202,7 +217,7 @@ pub fn tetronimo_test_setup(
                     ..Default::default()
                 },
             )
-            .with(Tetronimo {
+            .with(TetronimoBlock {
                 speed: 0.5,
                 last_grid_pos: (-1, -1),
                 current_grid_pos: (-1, -1),
