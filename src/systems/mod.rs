@@ -7,6 +7,7 @@ pub use arena::{
     arena_setup,
     tetronimo_test_setup,
     Tetronimo,
+    TetronimoState,
 };
 pub use fall::fall_system;
 pub use fall::grid_debug_system;

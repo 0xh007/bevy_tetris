@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use crate::TetronimoState;
 
 pub struct TetrisGrid {
     pub grid: [[GridCell; 20]; 10],
@@ -40,7 +41,13 @@ impl TetrisGrid {
     }
 
     // Maps the current position of the block to the nearest grid cell
-    pub fn update_position(&mut self, position: Vec3, last_grid_pos: (i32, i32)) -> (i32, i32) {
+    pub fn update_position(
+        &mut self,
+        position: Vec3,
+        last_grid_pos: (i32, i32),
+        tetronimo_state: TetronimoState,
+        ) -> (i32, i32) 
+    {
         let grid_columns = 10 - 1;
         let grid_rows = 20 - 1;
         let pos_x_round = position.x().round();
@@ -54,18 +61,30 @@ impl TetrisGrid {
 
                 if pos_x_round == grid_x_round {
                     if pos_y_round == grid_y_round {
-                        if !self.grid[x][y].occupied  { 
-                            self.grid[x][y].occupied = true;
-                        }
-                            found_cell.0 = x as i32;
-                            found_cell.1 = y as i32;
+                        // Found a matching cell for the moving block
+                        
+                        // Check the block status and assign the cell to occupied or unoccupied
+                        match tetronimo_state {
+                            TetronimoState::Stopped => {
+                                if !self.grid[x][y].occupied  { 
+                                    self.grid[x][y].occupied = true;
+                                }
+                            },
+                            TetronimoState::Moving => {
+                                // -1 Is the starting cell position
+                                // It gets updated to the proper cell once the blocks start moving
+                                if last_grid_pos.0 != -1 && last_grid_pos.1 != -1 {
+                                    let unoccupied_x = last_grid_pos.0 as usize;
+                                    let unoccupied_y = last_grid_pos.1 as usize;
 
-                        if last_grid_pos.0 != -1 && last_grid_pos.1 != -1 {
-                            let unoccupied_x = last_grid_pos.0 as usize;
-                            let unoccupied_y = last_grid_pos.1 as usize;
-
-                            self.grid[unoccupied_x][unoccupied_y].occupied = false;
+                                    self.grid[unoccupied_x][unoccupied_y].occupied = false;
+                                }
+                            },
                         }
+
+                        // Return the matched cell regardless of if we marked it occupied or not
+                        found_cell.0 = x as i32;
+                        found_cell.1 = y as i32;
                     }
                 }
             }

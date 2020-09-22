@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use std::fmt;
 
 // Sets up the game board and walls for the arena
 pub fn arena_setup(
@@ -70,11 +71,27 @@ enum TetronimoTest{
     Single,
 }
 
+#[derive(Copy, Clone)]
+pub enum TetronimoState {
+    Moving,
+    Stopped,
+}
+
+impl fmt::Display for TetronimoState {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match *self {
+            TetronimoState::Moving => write!(f, "Moving"),
+            TetronimoState::Stopped => write!(f, "Stopped"),
+        }
+    }
+}
+
 pub struct Tetronimo {
     pub speed: f32,
     pub name: String,
     pub last_grid_pos: (i32, i32),
     pub current_grid_pos: (i32, i32),
+    pub state: TetronimoState,
 }
 
 // Test system to setup some tetronimos for debug purposes
@@ -117,6 +134,7 @@ pub fn tetronimo_test_setup(
         },
 
         TetronimoTest::Single => {
+            // A
             commands.spawn(
                 PbrComponents {
                     mesh: asset_server
@@ -132,8 +150,29 @@ pub fn tetronimo_test_setup(
                 last_grid_pos: (-1, -1),
                 current_grid_pos: (-1, -1),
                 name: String::from("A"),
+                state: TetronimoState::Moving,
             });
 
+            // B
+            commands.spawn(
+                PbrComponents {
+                    mesh: asset_server
+                        .load("assets/tetronimo/export/tetronimo.gltf")
+                        .unwrap(),
+                    material: materials.add(tetronimo_color.into()),
+                    transform: Transform::from_translation(Vec3::new(-2.5, -1.5, 3.5)),
+                    ..Default::default()
+                },
+            )
+            .with(Tetronimo {
+                speed: 0.5,
+                last_grid_pos: (-1, -1),
+                current_grid_pos: (-1, -1),
+                name: String::from("B"),
+                state: TetronimoState::Moving,
+            });
+
+            // C
             commands.spawn(
                 PbrComponents {
                     mesh: asset_server
@@ -148,16 +187,18 @@ pub fn tetronimo_test_setup(
                 speed: 0.5,
                 last_grid_pos: (-1, -1),
                 current_grid_pos: (-1, -1),
-                name: String::from("B"),
+                name: String::from("C"),
+                state: TetronimoState::Moving,
             });
 
+            // D
             commands.spawn(
                 PbrComponents {
                     mesh: asset_server
                         .load("assets/tetronimo/export/tetronimo.gltf")
                         .unwrap(),
                     material: materials.add(tetronimo_color.into()),
-                    transform: Transform::from_translation(Vec3::new(-2.5, -4.5, 3.5)),
+                    transform: Transform::from_translation(Vec3::new(-1.5, -1.5, 3.5)),
                     ..Default::default()
                 },
             )
@@ -166,6 +207,7 @@ pub fn tetronimo_test_setup(
                 last_grid_pos: (-1, -1),
                 current_grid_pos: (-1, -1),
                 name: String::from("C"),
+                state: TetronimoState::Moving,
             });
 
             println!("Tetronimo Single test setup complete");
