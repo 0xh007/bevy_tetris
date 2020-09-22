@@ -149,6 +149,7 @@ pub fn tetronimo_test_setup(
                     },
             ))
             .with(Transform::identity())
+            .with(GlobalTransform::from_translation(Vec3::new(-2.5, -1.5, 3.5)))
             .with_children(|parent| {
                 // A
                 parent.spawn(
