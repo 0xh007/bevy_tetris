@@ -6,6 +6,7 @@ mod render;
 pub use arena::{
     arena_setup,
     tetronimo_test_setup,
+    Tetronimo,
     TetronimoBlock,
     TetronimoState,
 };

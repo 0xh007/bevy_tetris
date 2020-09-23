@@ -148,8 +148,8 @@ pub fn tetronimo_test_setup(
                         state: TetronimoState::Moving,
                     },
             ))
+            .with(GlobalTransform::from_translation(Vec3::new(0.0, 0.0, 3.5)))
             .with(Transform::identity())
-            .with(GlobalTransform::from_translation(Vec3::new(-2.5, -1.5, 3.5)))
             .with_children(|parent| {
                 // A
                 parent.spawn(
@@ -158,7 +158,7 @@ pub fn tetronimo_test_setup(
                             .load("assets/tetronimo/export/tetronimo.gltf")
                             .unwrap(),
                         material: materials.add(tetronimo_color.into()),
-                        transform: Transform::from_translation(Vec3::new(-2.5, -0.5, 3.5)),
+                        transform: Transform::from_translation(Vec3::new(0.0, 0.0, 0.0)),
                         ..Default::default()
                     },
                 )
@@ -177,7 +177,7 @@ pub fn tetronimo_test_setup(
                             .load("assets/tetronimo/export/tetronimo.gltf")
                             .unwrap(),
                         material: materials.add(tetronimo_color.into()),
-                        transform: Transform::from_translation(Vec3::new(-2.5, -1.5, 3.5)),
+                        transform: Transform::from_translation(Vec3::new(0.0, 1.0, 0.0)),
                         ..Default::default()
                     },
                 )
@@ -196,7 +196,7 @@ pub fn tetronimo_test_setup(
                             .load("assets/tetronimo/export/tetronimo.gltf")
                             .unwrap(),
                         material: materials.add(tetronimo_color.into()),
-                        transform: Transform::from_translation(Vec3::new(-2.5, -2.5, 3.5)),
+                        transform: Transform::from_translation(Vec3::new(0.0, -1.0, 0.0)),
                         ..Default::default()
                     },
                 )
@@ -215,7 +215,7 @@ pub fn tetronimo_test_setup(
                             .load("assets/tetronimo/export/tetronimo.gltf")
                             .unwrap(),
                         material: materials.add(tetronimo_color.into()),
-                        transform: Transform::from_translation(Vec3::new(-1.5, -1.5, 3.5)),
+                        transform: Transform::from_translation(Vec3::new(1.0, 0.0, 0.0)),
                         ..Default::default()
                     },
                 )
