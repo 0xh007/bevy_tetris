@@ -1,18 +1,47 @@
 use bevy::prelude::*;
 use crate::TetrisGrid;
+use crate::Tetronimo;
 use crate::TetronimoBlock;
 use crate::TetronimoState;
 
 pub fn fall_system(
     time: Res<Time>,
-    mut testris_grid: ResMut<TetrisGrid>,
-    mut tetronimo_query: Query<(&mut TetronimoBlock, &mut Transform)>,
+    mut tetris_grid: ResMut<TetrisGrid>,
+    mut tetronimo_query: Query<(&mut Tetronimo, &mut Transform, &mut Children)>,
+    block_query: Query<(&mut TetronimoBlock, &Transform)>,
 ) {
-    for (mut tetronimo, mut transform) in &mut tetronimo_query.iter() {
-        let direction = -1.0;
-        let translation = transform.translation_mut();
+    for (mut tetronimo, mut tetronimo_transform, mut children) in &mut tetronimo_query.iter() {
+        let tetronimo_translation = tetronimo_transform.translation();
+        for &child in &mut children.iter() {
+            let mut block = block_query.get_mut::<TetronimoBlock>(child).unwrap();
+            let block_relative_transform = block_query.get_mut::<Transform>(child).unwrap();
+            let block_relative_translation = block_relative_transform.translation();
 
-        let position = Vec3::new(translation.x(), translation.y(), translation.z());
+            let x = tetronimo_translation.x() + block_relative_translation.x();
+            let y = tetronimo_translation.y() + block_relative_translation.y();
+            let z = tetronimo_translation.z() + block_relative_translation.z();
+            let block_translation = Vec3::new(x, y, z);
+            
+            println!("-----");
+            println!("{}", block.name);
+            println!("{}", block.state);
+            println!("Physical Pos ({}, {})", block_translation.x(), block_translation.y());
+            println!("-----");
+        }
+    }
+}
+
+pub fn fall_system_old(
+    time: Res<Time>,
+    mut testris_grid: ResMut<TetrisGrid>,
+    mut tetronimo_query: Query<(&mut TetronimoBlock, &GlobalTransform, &mut Transform)>,
+) {
+    for (mut tetronimo, global_transform, mut transform) in &mut tetronimo_query.iter() {
+        let direction = -1.0;
+        let global_translation = global_transform.translation();
+        let mut translation = transform.translation();
+
+        let position = Vec3::new(global_translation.x(), global_translation.y(), global_translation.z());
         let cell = testris_grid.update_position(position, tetronimo.last_grid_pos, tetronimo.state);
 
         if cell != tetronimo.current_grid_pos {
@@ -23,7 +52,8 @@ pub fn fall_system(
         println!("-----");
         println!("{}", tetronimo.name);
         println!("{}", tetronimo.state);
-        println!("Last Pos [{}][{}]", tetronimo.last_grid_pos.0, tetronimo.last_grid_pos.1);
+        println!("Physical Pos ({}, {})", global_translation.x(), global_translation.y());
+        println!("Last Grid Pos [{}][{}]", tetronimo.last_grid_pos.0, tetronimo.last_grid_pos.1);
         println!("Current Grid Pos [{}][{}]", tetronimo.current_grid_pos.0, tetronimo.current_grid_pos.1);
         println!("-----");
         

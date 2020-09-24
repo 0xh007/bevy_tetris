@@ -148,7 +148,7 @@ pub fn tetronimo_test_setup(
                         state: TetronimoState::Moving,
                     },
             ))
-            .with(Transform::from_translation(Vec3::new(-4.0, 0.0, 3.5)))
+            .with(Transform::from_translation(Vec3::new(2.5, -4.5, 3.5)))
             .with(GlobalTransform::identity())
             //.with(Transform::identity())
             .with_children(|parent| {
@@ -224,7 +224,7 @@ pub fn tetronimo_test_setup(
                     speed: 0.5,
                     last_grid_pos: (-1, -1),
                     current_grid_pos: (-1, -1),
-                    name: String::from("C"),
+                    name: String::from("D"),
                     state: TetronimoState::Moving,
                 });
             });
