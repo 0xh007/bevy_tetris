@@ -87,7 +87,6 @@ impl fmt::Display for TetronimoState {
 }
 
 pub struct TetronimoBlock {
-    pub speed: f32,
     pub name: String,
     pub last_grid_pos: (i32, i32),
     pub current_grid_pos: (i32, i32),
@@ -164,7 +163,6 @@ pub fn tetronimo_test_setup(
                     },
                 )
                 .with(TetronimoBlock {
-                    speed: 0.5,
                     last_grid_pos: (-1, -1),
                     current_grid_pos: (-1, -1),
                     name: String::from("A"),
@@ -183,7 +181,6 @@ pub fn tetronimo_test_setup(
                     },
                 )
                 .with(TetronimoBlock {
-                    speed: 0.5,
                     last_grid_pos: (-1, -1),
                     current_grid_pos: (-1, -1),
                     name: String::from("B"),
@@ -202,7 +199,6 @@ pub fn tetronimo_test_setup(
                     },
                 )
                 .with(TetronimoBlock {
-                    speed: 0.5,
                     last_grid_pos: (-1, -1),
                     current_grid_pos: (-1, -1),
                     name: String::from("C"),
@@ -221,7 +217,6 @@ pub fn tetronimo_test_setup(
                     },
                 )
                 .with(TetronimoBlock {
-                    speed: 0.5,
                     last_grid_pos: (-1, -1),
                     current_grid_pos: (-1, -1),
                     name: String::from("D"),
