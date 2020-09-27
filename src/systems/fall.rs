@@ -11,14 +11,14 @@ pub fn fall_system(
     block_query: Query<(&mut TetronimoBlock, &Transform)>,
 ) {
     for (mut tetronimo, mut tetronimo_transform, mut children) in &mut tetronimo_query.iter() {
-        let mut tetronimo_translation = tetronimo_transform.translation();
         let direction = -1.0;
         let mut collision_detected = false;
+        let mut tetronimo_translation = tetronimo_transform.translation_mut();
 
         for &child in &mut children.iter() {
             let mut block = block_query.get_mut::<TetronimoBlock>(child).unwrap();
             let block_relative_transform = block_query.get_mut::<Transform>(child).unwrap();
-            let block_relative_translation = block_relative_transform.translation();
+            let mut block_relative_translation = block_relative_transform.translation();
 
             let x = tetronimo_translation.x() + block_relative_translation.x();
             let y = tetronimo_translation.y() + block_relative_translation.y();
@@ -32,12 +32,6 @@ pub fn fall_system(
                 block.current_grid_pos = cell;
             }
             
-            println!("-----");
-            println!("{}", block.name);
-            println!("{}", block.state);
-            println!("Physical Pos ({}, {})", block_translation.x(), block_translation.y());
-            println!("-----");
-
             if TetrisGrid::is_cell_below_occupied(&tetris_grid, cell.0, cell.1) {
                 block.state = TetronimoState::Stopped;
                 collision_detected = true;
