@@ -26,6 +26,7 @@ pub fn fall_system(
             let block_translation = Vec3::new(x, y, z);
 
             let cell = tetris_grid.update_position(block_translation, block.last_grid_pos, block.state);
+            // delete this comment
 
             if cell != block.current_grid_pos {
                 block.last_grid_pos = block.current_grid_pos;
