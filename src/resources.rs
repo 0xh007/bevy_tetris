@@ -15,8 +15,8 @@ impl TetrisGrid {
         };
         let mut new_grid = [[empty_cell; 20] ; 10];
 
-        let grid_rows = 10 - 1;
-        let grid_columns = 20 - 1;
+        let grid_columns = 10;
+        let grid_rows = 20;
         let x_min = -4.5;
         let x_max = 5.5;
         let y_min = -9.5;
@@ -25,10 +25,11 @@ impl TetrisGrid {
 
 
         let mut current_x = x_min;
-        for x in 0..grid_rows {
+        let mut row_count = 0;
+        for x in 0..(grid_columns - 1) {
             let mut current_y = y_min;
 
-            for y in 0..grid_columns {
+            for y in 0..(grid_rows - 1) {
                 new_grid[x][y].location = Vec3::new(current_x, current_y, static_z);
                 new_grid[x][y].x = x as i32;
                 new_grid[x][y].y = y as i32;
@@ -91,7 +92,7 @@ impl TetrisGrid {
         }
 
         if found_cell.0 == -1 && found_cell.1 == -1 {
-            println!("invalid cell");
+            //println!("Invalid cell");
         }
 
         found_cell
