@@ -51,9 +51,36 @@ impl TetrisGrid {
     {
         let grid_columns = 10 - 1;
         let grid_rows = 20 - 1;
-        let pos_x_round = position.x().round();
-        let pos_y_round = position.y().round();
+
+        let mut pos_x_round = position.x().round();
+        let mut pos_y_round = position.y().round();
+
+        // Round away from 0
+        if pos_x_round == 0.0 {
+            pos_x_round = 1.0;
+        }
+        if pos_y_round == 0.0 {
+            pos_y_round = 1.0;
+        }
+
         let mut found_cell = (-1, -1);
+        
+        // Failure at (7, 9)
+        println!("------");
+        println!();
+        println!("7,8 LOC: {}", self.grid[7][8].location);
+        println!("7,9 LOC_RND: ({}, {})", self.grid[7][8].location.x().round(), self.grid[7][8].location.y().round());
+        println!();
+        println!("7,9 LOC: {}", self.grid[7][9].location);
+        println!("7,9 LOC_RND: ({}, {})", self.grid[7][9].location.x().round(), self.grid[7][9].location.y().round());
+        println!();
+        println!("7,10 LOC: {}", self.grid[7][10].location);
+        println!("7,10 LOC_RND: ({}, {})", self.grid[7][10].location.x().round(), self.grid[7][10].location.y().round());
+        println!();
+        println!("Match LOC: {}", position);
+        println!("Match LOC_RND: ({}, {})", pos_x_round, pos_y_round);
+        println!();
+        println!("------");
 
         for x in 0..grid_columns {
             for y in 0..grid_rows {
@@ -63,6 +90,7 @@ impl TetrisGrid {
                 if pos_x_round == grid_x_round {
                     if pos_y_round == grid_y_round {
                         // Found a matching cell for the moving block
+
                         
                         // Check the block status and assign the cell to occupied or unoccupied
                         match tetronimo_state {
@@ -92,7 +120,7 @@ impl TetrisGrid {
         }
 
         if found_cell.0 == -1 && found_cell.1 == -1 {
-            //println!("Invalid cell");
+            println!("Invalid cell");
         }
 
         found_cell
