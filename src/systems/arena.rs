@@ -77,6 +77,12 @@ pub enum TetronimoState {
     Stopped,
 }
 
+pub enum TetronimoHorizontalMovement {
+    Left,
+    Right,
+    Stopped,
+}
+
 impl fmt::Display for TetronimoState {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match *self {
