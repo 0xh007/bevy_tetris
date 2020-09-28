@@ -64,23 +64,6 @@ impl TetrisGrid {
         }
 
         let mut found_cell = (-1, -1);
-        
-        // Failure at (7, 9)
-        println!("------");
-        println!();
-        println!("7,8 LOC: {}", self.grid[7][8].location);
-        println!("7,9 LOC_RND: ({}, {})", self.grid[7][8].location.x().round(), self.grid[7][8].location.y().round());
-        println!();
-        println!("7,9 LOC: {}", self.grid[7][9].location);
-        println!("7,9 LOC_RND: ({}, {})", self.grid[7][9].location.x().round(), self.grid[7][9].location.y().round());
-        println!();
-        println!("7,10 LOC: {}", self.grid[7][10].location);
-        println!("7,10 LOC_RND: ({}, {})", self.grid[7][10].location.x().round(), self.grid[7][10].location.y().round());
-        println!();
-        println!("Match LOC: {}", position);
-        println!("Match LOC_RND: ({}, {})", pos_x_round, pos_y_round);
-        println!();
-        println!("------");
 
         for x in 0..grid_columns {
             for y in 0..grid_rows {
