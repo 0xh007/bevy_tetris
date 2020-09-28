@@ -73,7 +73,6 @@ impl TetrisGrid {
                 if pos_x_round == grid_x_round {
                     if pos_y_round == grid_y_round {
                         // Found a matching cell for the moving block
-
                         
                         // Check the block status and assign the cell to occupied or unoccupied
                         match tetronimo_state {

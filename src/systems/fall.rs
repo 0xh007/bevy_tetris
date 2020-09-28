@@ -32,14 +32,25 @@ pub fn fall_system(
                 block.current_grid_pos = cell;
             }
             
-            if TetrisGrid::is_cell_below_occupied(&tetris_grid, cell.0, cell.1) {
-                block.state = TetronimoState::Stopped;
-                collision_detected = true;
+            match tetronimo.state {
+                TetronimoState::Moving => {
+                    if TetrisGrid::is_cell_below_occupied(&tetris_grid, cell.0, cell.1) {
+                        block.state = TetronimoState::Stopped;
+                        collision_detected = true;
+                    }
+                },
+                TetronimoState::Stopped => {
+                    block.state = TetronimoState::Stopped;
+                    collision_detected = true
+                },
             }
+
         }
 
         if !collision_detected {
             *tetronimo_translation.y_mut() += time.delta_seconds * direction * tetronimo.speed;
+        } else {
+            tetronimo.state = TetronimoState::Stopped;
         }
     }
 }
