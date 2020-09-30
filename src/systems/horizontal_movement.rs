@@ -5,11 +5,6 @@ use crate::TetronimoBlock;
 use crate::TetronimoState;
 use crate::TetronimoDirection;
 
-// Left <-> Right input received
-// Get current transform
-// Set destination transform to +/- 1 on the x-axis
-// Move in that direction until current transform == destination transform
-
 pub fn horizontal_movement_system(
     time: Res<Time>,
     keyboard_input: Res<Input<KeyCode>>,
