@@ -18,18 +18,26 @@ pub fn horizontal_movement_system(
             // Approximate the current position on the x-axis
             let trans_x_rnd = (tetronimo_translation.x() * 100.0).round() / 100.0;
             let mut x_destination = (trans_x_rnd - 1.0) as f32;
-            tetronimo.traveling = true;
-            tetronimo.destination = Vec3::new(x_destination, 0.0, 0.0);
-            tetronimo.movement_direction = TetronimoDirection::Left;
+
+            // Bound the tetronimo within the arena
+            if x_destination > -4.5 {
+                tetronimo.traveling = true;
+                tetronimo.destination = Vec3::new(x_destination, 0.0, 0.0);
+                tetronimo.movement_direction = TetronimoDirection::Left;
+            }
         }
 
         if keyboard_input.pressed(KeyCode::Right) && !tetronimo.traveling {
             // Approximate the current position on the x-axis
             let trans_x_rnd = (tetronimo_translation.x() * 100.0).round() / 100.0;
             let mut x_destination = (trans_x_rnd + 1.0) as f32;
-            tetronimo.traveling = true;
-            tetronimo.destination = Vec3::new(x_destination, 0.0, 0.0);
-            tetronimo.movement_direction = TetronimoDirection::Right;
+            
+            // Bound the tetronimo within the arena
+            if x_destination < 5.5 {
+                tetronimo.traveling = true;
+                tetronimo.destination = Vec3::new(x_destination, 0.0, 0.0);
+                tetronimo.movement_direction = TetronimoDirection::Right;
+            }
         }
 
         if tetronimo.traveling {
@@ -51,6 +59,9 @@ pub fn horizontal_movement_system(
                     }
                 }
                 *tetronimo_translation.x_mut() += time.delta_seconds * direction * tetronimo.lateral_speed;
+                
+                // bound the tetronimo within the arena
+                //*tetronimo_translation.x_mut() = tetronimo_translation.x().min(-4.5).max(5.5);
             }
         }
     }

@@ -153,7 +153,7 @@ pub fn tetronimo_test_setup(
             // T-tetronimo 1
             commands.spawn((
                     Tetronimo {
-                        lateral_speed: 5.0,
+                        lateral_speed: 3.0,
                         speed: 1.0,
                         name: String::from("T-Tetronimo"),
                         state: TetronimoState::Moving,
