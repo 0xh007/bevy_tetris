@@ -77,10 +77,10 @@ pub enum TetronimoState {
     Stopped,
 }
 
-pub enum TetronimoHorizontalMovement {
+pub enum TetronimoDirection {
     Left,
     Right,
-    Stopped,
+    None,
 }
 
 impl fmt::Display for TetronimoState {
@@ -101,8 +101,12 @@ pub struct TetronimoBlock {
 
 pub struct Tetronimo {
     pub speed: f32,
+    pub lateral_speed: f32,
     pub name: String,
     pub state: TetronimoState,
+    pub destination: Vec3,
+    pub traveling: bool,
+    pub movement_direction: TetronimoDirection,
 }
 
 // Test system to setup some tetronimos for debug purposes
@@ -149,9 +153,13 @@ pub fn tetronimo_test_setup(
             // T-tetronimo 1
             commands.spawn((
                     Tetronimo {
+                        lateral_speed: 5.0,
                         speed: 1.0,
                         name: String::from("T-Tetronimo"),
                         state: TetronimoState::Moving,
+                        destination: Vec3::new(0.0, 0.0, 0.0),
+                        traveling: false,
+                        movement_direction: TetronimoDirection::None,
                     },
             ))
             .with(Transform::from_translation(Vec3::new(2.5, 6.5, 3.5)))

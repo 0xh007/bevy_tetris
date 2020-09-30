@@ -44,7 +44,6 @@ pub fn fall_system(
                     collision_detected = true
                 },
             }
-
         }
 
         if !collision_detected {
