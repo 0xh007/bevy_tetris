@@ -41,6 +41,7 @@ impl TetrisGrid {
         TetrisGrid { grid: new_grid }
     }
 
+
     // Maps the current position of the block to the nearest grid cell
     pub fn update_position(
         &mut self,
@@ -49,6 +50,39 @@ impl TetrisGrid {
         tetronimo_state: TetronimoState,
         ) -> (i32, i32) 
     {
+        let found_cell = self.get_cell_from_pos(position);
+
+        if found_cell.0 == -1 && found_cell.1 == -1 {
+             println!("Invalid cell");
+             found_cell
+        } else {
+            // Found a matching cell for the moving block
+            // Check the block status and assign the cell to occupied or unoccupied
+            let x = found_cell.0 as usize;
+            let y = found_cell.1 as usize;
+            match tetronimo_state {
+                TetronimoState::Stopped => {
+                    if !self.grid[x][y].occupied  { 
+                        self.grid[x][y].occupied = true;
+                    }
+                },
+                TetronimoState::Moving => {
+                    // -1 Is the starting cell position
+                    // It gets updated to the proper cell once the blocks start moving
+                    if last_grid_pos.0 != -1 && last_grid_pos.1 != -1 {
+                        let unoccupied_x = last_grid_pos.0 as usize;
+                        let unoccupied_y = last_grid_pos.1 as usize;
+
+                        self.grid[unoccupied_x][unoccupied_y].occupied = false;
+                    }
+                },
+            }
+
+            found_cell
+        }
+    }
+
+     pub fn get_cell_from_pos(&self, position: Vec3) -> (i32, i32) {
         let grid_columns = 10 - 1;
         let grid_rows = 20 - 1;
 
@@ -72,28 +106,7 @@ impl TetrisGrid {
 
                 if pos_x_round == grid_x_round {
                     if pos_y_round == grid_y_round {
-                        // Found a matching cell for the moving block
-                        
-                        // Check the block status and assign the cell to occupied or unoccupied
-                        match tetronimo_state {
-                            TetronimoState::Stopped => {
-                                if !self.grid[x][y].occupied  { 
-                                    self.grid[x][y].occupied = true;
-                                }
-                            },
-                            TetronimoState::Moving => {
-                                // -1 Is the starting cell position
-                                // It gets updated to the proper cell once the blocks start moving
-                                if last_grid_pos.0 != -1 && last_grid_pos.1 != -1 {
-                                    let unoccupied_x = last_grid_pos.0 as usize;
-                                    let unoccupied_y = last_grid_pos.1 as usize;
 
-                                    self.grid[unoccupied_x][unoccupied_y].occupied = false;
-                                }
-                            },
-                        }
-
-                        // Return the matched cell regardless of if we marked it occupied or not
                         found_cell.0 = x as i32;
                         found_cell.1 = y as i32;
                     }
@@ -108,6 +121,7 @@ impl TetrisGrid {
         found_cell
     }
 
+
     pub fn is_cell_below_occupied(&self, cur_x: i32, cur_y: i32) -> bool {
         let x = cur_x;
         let y = cur_y - 1;
@@ -119,8 +133,20 @@ impl TetrisGrid {
             // Check the cell below if we're not at the bottom
             return self.grid[x as usize][y as usize].occupied;
         }
-
     }
+
+
+    pub fn is_cell_left_occupied(&self, cur_x: i32, cur_y: i32) -> bool {
+        let x = cur_x - 1;
+        let y = cur_y;
+
+        if x < 0 {
+            return true;
+        } else {
+            return self.grid[x as usize][y as usize].occupied;
+        }
+    }
+
 
     pub fn print_grid(&self) {
         let grid_rows = 20 - 1;
@@ -141,7 +167,6 @@ impl TetrisGrid {
         }
         println!("----END GRID-----");
     }
-
 }
 
 #[derive(Copy, Clone)]

@@ -59,9 +59,6 @@ pub fn horizontal_movement_system(
                     }
                 }
                 *tetronimo_translation.x_mut() += time.delta_seconds * direction * tetronimo.lateral_speed;
-                
-                // bound the tetronimo within the arena
-                //*tetronimo_translation.x_mut() = tetronimo_translation.x().min(-4.5).max(5.5);
             }
         }
     }
