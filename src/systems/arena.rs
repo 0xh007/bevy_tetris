@@ -105,7 +105,7 @@ pub struct Tetronimo {
     pub name: String,
     pub state: TetronimoState,
     pub destination: Vec3,
-    pub traveling: bool,
+    pub traveling_laterally: bool,
     pub movement_direction: TetronimoDirection,
 }
 
@@ -158,7 +158,7 @@ pub fn tetronimo_test_setup(
                         name: String::from("T-Tetronimo"),
                         state: TetronimoState::Moving,
                         destination: Vec3::new(0.0, 0.0, 0.0),
-                        traveling: false,
+                        traveling_laterally: false,
                         movement_direction: TetronimoDirection::None,
                     },
             ))
@@ -243,89 +243,93 @@ pub fn tetronimo_test_setup(
 
             // ---------------------
             // T-tetronimo 2
-            //commands.spawn((
-            //        Tetronimo {
-            //            speed: 1.0,
-            //            name: String::from("T-Tetronimo_2"),
-            //            state: TetronimoState::Moving,
-            //        },
-            //))
-            //.with(Transform::from_translation(Vec3::new(2.5, 6.5, 3.5)))
-            //.with(GlobalTransform::identity())
-            ////.with(Transform::identity())
-            //.with_children(|parent| {
-            //    // A
-            //    parent.spawn(
-            //        PbrComponents {
-            //            mesh: asset_server
-            //                .load("assets/tetronimo/export/tetronimo.gltf")
-            //                .unwrap(),
-            //            material: materials.add(tetronimo_color.into()),
-            //            transform: Transform::from_translation(Vec3::new(0.0, 0.0, 0.0)),
-            //            ..Default::default()
-            //        },
-            //    )
-            //    .with(TetronimoBlock {
-            //        last_grid_pos: (-1, -1),
-            //        current_grid_pos: (-1, -1),
-            //        name: String::from("A"),
-            //        state: TetronimoState::Moving,
-            //    });
+            commands.spawn((
+                    Tetronimo {
+                        lateral_speed: 3.0,
+                        speed: 1.0,
+                        name: String::from("T-Tetronimo_2"),
+                        state: TetronimoState::Moving,
+                        destination: Vec3::new(0.0, 0.0, 0.0),
+                        traveling_laterally: false,
+                        movement_direction: TetronimoDirection::None,
+                    },
+            ))
+            .with(Transform::from_translation(Vec3::new(2.5, -6.5, 3.5)))
+            .with(GlobalTransform::identity())
+            //.with(Transform::identity())
+            .with_children(|parent| {
+                // A
+                parent.spawn(
+                    PbrComponents {
+                        mesh: asset_server
+                            .load("assets/tetronimo/export/tetronimo.gltf")
+                            .unwrap(),
+                        material: materials.add(tetronimo_color.into()),
+                        transform: Transform::from_translation(Vec3::new(0.0, 0.0, 0.0)),
+                        ..Default::default()
+                    },
+                )
+                .with(TetronimoBlock {
+                    last_grid_pos: (-1, -1),
+                    current_grid_pos: (-1, -1),
+                    name: String::from("A"),
+                    state: TetronimoState::Moving,
+                });
 
-            //    // B
-            //    parent.spawn(
-            //        PbrComponents {
-            //            mesh: asset_server
-            //                .load("assets/tetronimo/export/tetronimo.gltf")
-            //                .unwrap(),
-            //            material: materials.add(tetronimo_color.into()),
-            //            transform: Transform::from_translation(Vec3::new(0.0, 1.0, 0.0)),
-            //            ..Default::default()
-            //        },
-            //    )
-            //    .with(TetronimoBlock {
-            //        last_grid_pos: (-1, -1),
-            //        current_grid_pos: (-1, -1),
-            //        name: String::from("B"),
-            //        state: TetronimoState::Moving,
-            //    });
+                // B
+                parent.spawn(
+                    PbrComponents {
+                        mesh: asset_server
+                            .load("assets/tetronimo/export/tetronimo.gltf")
+                            .unwrap(),
+                        material: materials.add(tetronimo_color.into()),
+                        transform: Transform::from_translation(Vec3::new(0.0, 1.0, 0.0)),
+                        ..Default::default()
+                    },
+                )
+                .with(TetronimoBlock {
+                    last_grid_pos: (-1, -1),
+                    current_grid_pos: (-1, -1),
+                    name: String::from("B"),
+                    state: TetronimoState::Moving,
+                });
 
-            //    // C
-            //    parent.spawn(
-            //        PbrComponents {
-            //            mesh: asset_server
-            //                .load("assets/tetronimo/export/tetronimo.gltf")
-            //                .unwrap(),
-            //            material: materials.add(tetronimo_color.into()),
-            //            transform: Transform::from_translation(Vec3::new(0.0, -1.0, 0.0)),
-            //            ..Default::default()
-            //        },
-            //    )
-            //    .with(TetronimoBlock {
-            //        last_grid_pos: (-1, -1),
-            //        current_grid_pos: (-1, -1),
-            //        name: String::from("C"),
-            //        state: TetronimoState::Moving,
-            //    });
+                // C
+                parent.spawn(
+                    PbrComponents {
+                        mesh: asset_server
+                            .load("assets/tetronimo/export/tetronimo.gltf")
+                            .unwrap(),
+                        material: materials.add(tetronimo_color.into()),
+                        transform: Transform::from_translation(Vec3::new(0.0, -1.0, 0.0)),
+                        ..Default::default()
+                    },
+                )
+                .with(TetronimoBlock {
+                    last_grid_pos: (-1, -1),
+                    current_grid_pos: (-1, -1),
+                    name: String::from("C"),
+                    state: TetronimoState::Moving,
+                });
 
-            //    // D
-            //    parent.spawn(
-            //        PbrComponents {
-            //            mesh: asset_server
-            //                .load("assets/tetronimo/export/tetronimo.gltf")
-            //                .unwrap(),
-            //            material: materials.add(tetronimo_color.into()),
-            //            transform: Transform::from_translation(Vec3::new(1.0, 0.0, 0.0)),
-            //            ..Default::default()
-            //        },
-            //    )
-            //    .with(TetronimoBlock {
-            //        last_grid_pos: (-1, -1),
-            //        current_grid_pos: (-1, -1),
-            //        name: String::from("D"),
-            //        state: TetronimoState::Moving,
-            //    });
-            //});
+                // D
+                parent.spawn(
+                    PbrComponents {
+                        mesh: asset_server
+                            .load("assets/tetronimo/export/tetronimo.gltf")
+                            .unwrap(),
+                        material: materials.add(tetronimo_color.into()),
+                        transform: Transform::from_translation(Vec3::new(1.0, 0.0, 0.0)),
+                        ..Default::default()
+                    },
+                )
+                .with(TetronimoBlock {
+                    last_grid_pos: (-1, -1),
+                    current_grid_pos: (-1, -1),
+                    name: String::from("D"),
+                    state: TetronimoState::Moving,
+                });
+            });
             // ---------------------
 
             println!("Tetronimo Single test setup complete");

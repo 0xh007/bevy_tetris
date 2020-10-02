@@ -147,6 +147,18 @@ impl TetrisGrid {
         }
     }
 
+    pub fn is_cell_right_occupied(&self, cur_x: i32, cur_y: i32) -> bool {
+        println!("CUR X: {}", cur_x);
+        let x = cur_x + 1;
+        let y = cur_y;
+
+        if x > 9 {
+            return true;
+        } else {
+            return self.grid[x as usize][y as usize].occupied;
+        }
+    }
+
 
     pub fn print_grid(&self) {
         let grid_rows = 20 - 1;
